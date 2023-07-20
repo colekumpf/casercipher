@@ -42,21 +42,23 @@ def direction_check(direct): # a method to make sure the direction being inputte
   
     return direct
 
+def shift_check(shaft): # a method to ensure the shift being inputted is valid
+    while not shaft.isnumeric(): # enter and remain in loop if shift is not valid
+        print("\nSorry, your inputted shift was not a number. Please try again.\n")
+        shaft = input("Type the shift number:\n") # take the desired shift from input
+    return int(shaft) # return the shift as an integer when given shift is valid
 
 question = 'yes' # enter in to while loop 
 
 while question == 'yes': # while loop to repeat process as long as user desires
 
     direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n") # get direction from input
-    direction = direction_check(direction) # confirm given direction is valid
-    text = input("Type your message:\n").lower() # take the desired message from input
-    shift = input("Type the shift number:\n") # take the desired shift from input
+    start_direction = direction_check(direction) # confirm given direction is valid and assign it to start_direction
     
-    if not shift.isnumeric(): # check to make sure the shift is a valid number
-        print(f"{shift} is not a valid number to shift.")
-        exit(1)
-    else :
-        shift = int(shift) # convert shift from string to letter
+    start_text = input("Type your message:\n").lower() # take the desired message from input
+    
+    shift = input("Type the shift number:\n") # take the desired shift from input
+    start_shift = shift_check(shaft = shift) # assign start_shift to a shift that is a verified number (the return of shift_check)
         
-    caeser(text,shift,direction) # call caeser once the text shift and direction are known
+    caeser(text = start_text, shift = start_shift, direction = start_direction) # call caeser once the text shift and direction are known
     question = input("Type 'yes' if you want to encode or decode again. Otherwise type 'no' or anything else.\n") 
